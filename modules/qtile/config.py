@@ -34,10 +34,11 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 # Startup Fastfetch
+@hook.subscribe.startup_once
 def autostart():
     # Launches Ghostty and executes fastfetch immediately
     # The 'sh -c' allows fastfetch to run and then drop you into your shell
-    subprocess.Popen(['ghostty', '-e', 'sh -c "fastfetch; exec $SHELL"'])
+    subprocess.Popen(["ghostty", "-e", "fastfetch"])
 
 # Scripts!!
 def has_battery():
@@ -80,6 +81,7 @@ keys = [
         desc="Toggle between split and unsplit sides of stack",
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
+    Key([mod], "Space", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),

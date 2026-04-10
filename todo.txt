@@ -4,3 +4,7 @@ add steam capability through modules
 add xautohook and i3lock for lock screen
 add qtile ethernet widget
 possibly make dynamic desktop/laptop switching for monitor and ui elements
+npins
+stylix
+fix startup fastfetch console 
+plymouth

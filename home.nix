@@ -9,6 +9,7 @@
     ./modules/shell.nix
     ./modules/git.nix
     ./modules/qtile.nix
+    ./modules/ghostty.nix
   ];
 
 }
