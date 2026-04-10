@@ -12,6 +12,7 @@
       ll = "ls -la";
       gs = "git status";
       rebuild = "sudo nixos-rebuild switch -I nixos-config=$HOME/nixos-config/configuration.nix";
+      restart = "sudo reboot now";
     };
   };
 

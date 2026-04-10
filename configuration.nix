@@ -13,7 +13,19 @@
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
+  boot.initrd.systemd.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Plymouth
+  boot.plymouth = {
+    enable = true;
+    theme = "bgrt"; 
+  };
+  boot.consoleLogLevel = 3;
+  boot.initrd.verbose = false;
+  boot.kernelParams = [ "quiet" "splash" "udev.log_level=3" "systemd.show_status=auto" ];
+  boot.loader.timeout = 0;
+  boot.loader.systemd-boot.consoleMode = "max";
 
   boot.initrd.luks.devices."luks-fa239893-7e85-4493-b090-913fce0bc8c3".device = "/dev/disk/by-uuid/fa239893-7e85-4493-b090-913fce0bc8c3";
   networking.hostName = "nixos"; # Define your hostname.
@@ -90,6 +102,8 @@
     fastfetch
     scrot
     xclip
+    keyutils
+    qimgv
   ];
   programs.zsh = {
   enable = true;

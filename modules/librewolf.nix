@@ -10,6 +10,8 @@
       "browser.search.defaultenginename" = "Startpage";
       "browser.sessionstore.resume_from_crash" = false;
       "browser.tabs.groups.enabled" = false;
+      "places.history.enabled" = false;
+
     };
   };
 }

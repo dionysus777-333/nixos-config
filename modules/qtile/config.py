@@ -36,9 +36,8 @@ from libqtile.utils import guess_terminal
 # Startup Fastfetch
 @hook.subscribe.startup_once
 def autostart():
-    # Launches Ghostty and executes fastfetch immediately
-    # The 'sh -c' allows fastfetch to run and then drop you into your shell
-    subprocess.Popen(["ghostty", "fastfetch"])
+    subprocess.Popen(['ghostty', '-e', "sh -c 'fastfetch; exec $SHELL'"])
+    
 
 # Scripts!!
 def has_battery():
@@ -100,7 +99,7 @@ keys = [
     Key([mod], "p", lazy.spawn("amixer sset Master 5%+")),
     Key([mod], "o", lazy.spawn("amixer sset Master 5%-")),
     Key([mod], "i", lazy.spawn("amixer sset Master toggle"), desc="Toggle Mute"),
-    Key([mod, "Shift"], "s", lazy.spawn("scrot -s -f '%Y-%m-%d_%H%M%S.png' -e 'xclip -selection clipboard -t image/png -i $f'"), desc="Screenshot"),
+    Key([mod, "Shift"], "s", lazy.spawn("scrot -s -f '%Y-%m-%d_%H%M%S.png' -e 'xclip -selection clipboard -t image/png -i $f; mv $f ~/Pictures/Screenshots/'"), desc="Screenshot"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
