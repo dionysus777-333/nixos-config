@@ -10,6 +10,6 @@
     ./modules/git.nix
     ./modules/qtile.nix
     ./modules/ghostty.nix
+    ./modules/librewolf.nix
   ];
-
 }

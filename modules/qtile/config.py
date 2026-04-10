@@ -38,7 +38,7 @@ from libqtile.utils import guess_terminal
 def autostart():
     # Launches Ghostty and executes fastfetch immediately
     # The 'sh -c' allows fastfetch to run and then drop you into your shell
-    subprocess.Popen(["ghostty", "-e", "fastfetch"])
+    subprocess.Popen(["ghostty", "fastfetch"])
 
 # Scripts!!
 def has_battery():
@@ -47,6 +47,7 @@ def has_battery():
 
 mod = "mod4"
 terminal = guess_terminal()
+browser = "librewolf"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -82,9 +83,10 @@ keys = [
     ),
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
     Key([mod], "Space", lazy.spawn("rofi -show drun"), desc="Launch rofi"),
+    Key([mod], "w", lazy.spawn(browser), desc="Launch browser"),
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
-    Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
+    Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key(
         [mod],
         "f",
@@ -98,6 +100,7 @@ keys = [
     Key([mod], "p", lazy.spawn("amixer sset Master 5%+")),
     Key([mod], "o", lazy.spawn("amixer sset Master 5%-")),
     Key([mod], "i", lazy.spawn("amixer sset Master toggle"), desc="Toggle Mute"),
+    Key([mod, "Shift"], "s", lazy.spawn("scrot -s -f '%Y-%m-%d_%H%M%S.png' -e 'xclip -selection clipboard -t image/png -i $f'"), desc="Screenshot"),
 ]
 
 # Add key bindings to switch VTs in Wayland.

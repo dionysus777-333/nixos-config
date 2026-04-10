@@ -8,3 +8,4 @@ npins
 stylix
 fix startup fastfetch console 
 plymouth
+config librewolf using home manager

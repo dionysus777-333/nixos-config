@@ -88,6 +88,8 @@
     dunst
     btop
     fastfetch
+    scrot
+    xclip
   ];
   programs.zsh = {
   enable = true;
