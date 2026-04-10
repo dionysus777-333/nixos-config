@@ -80,11 +80,13 @@
     wget
     ghostty
     librewolf
-    syncthing
     keepassxc
     git
   ];
   programs.zsh = {
+  enable = true;
+  };
+  services.syncthing = {
   enable = true;
   };
 
