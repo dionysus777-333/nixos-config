@@ -82,6 +82,12 @@
     librewolf
     keepassxc
     git
+    gh
+    alsa-utils
+    rofi
+    dunst
+    btop
+    fastfetch
   ];
   programs.zsh = {
   enable = true;
@@ -92,6 +98,24 @@
 
   # Enable Home Manager
   home-manager.users.user = import ./home.nix;
+
+  # Disable Mouse Acceleration
+  
+  services.xserver.libinput = {
+    enable = true;
+    mouse = {
+      # Use the "flat" profile to disable acceleration
+      accelProfile = "flat";
+      # Optional: set base sensitivity (0 is default, -1.0 to 1.0 range)
+      accelSpeed = "0"; 
+      };
+    };
+
+   # Virtualbox
+   virtualisation.virtualbox.host.enable = true;
+   users.extraGroups.vboxusers.members = [ "user" ];
+
+  
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

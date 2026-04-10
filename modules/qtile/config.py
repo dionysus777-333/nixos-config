@@ -25,12 +25,24 @@
 # SOFTWARE.
 
 import os
+import subprocess
 
 import libqtile.resources
-from libqtile import bar, layout, qtile, widget
+from libqtile import bar, layout, qtile, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
+
+# Startup Fastfetch
+def autostart():
+    # Launches Ghostty and executes fastfetch immediately
+    # The 'sh -c' allows fastfetch to run and then drop you into your shell
+    subprocess.Popen(['ghostty', '-e', 'sh -c "fastfetch; exec $SHELL"'])
+
+# Scripts!!
+def has_battery():
+    # Typically batteries are named BAT0, BAT1, etc. in this directory
+    return len(os.listdir('/sys/class/power_supply/')) > 0
 
 mod = "mod4"
 terminal = guess_terminal()
@@ -81,6 +93,9 @@ keys = [
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
+    Key([mod], "p", lazy.spawn("amixer sset Master 5%+")),
+    Key([mod], "o", lazy.spawn("amixer sset Master 5%-")),
+    Key([mod], "i", lazy.spawn("amixer sset Master toggle"), desc="Toggle Mute"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -123,9 +138,16 @@ for i in groups:
         ]
     )
 
+layout_theme = {
+    "border_width": 2,
+    "margin": 2,
+    "border_focus": "#5C82FF",  # Your active window highlight color
+    "border_normal": "#1D2330",   # Your inactive window color
+}
+
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.Max(),
+    layout.Columns(**layout_theme),
+    # layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -147,14 +169,14 @@ widget_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 logo = os.path.join(os.path.dirname(libqtile.resources.__file__), "logo.png")
-screens = [
-    Screen(
-        bottom=bar.Bar(
-            [
-                widget.CurrentLayout(),
-                widget.GroupBox(),
+
+widgets_list = [
+              # widget.CurrentLayout(),
                 widget.Prompt(),
-                widget.WindowName(),
+                widget.Spacer(),
+                widget.GroupBox(),
+                widget.Spacer(),
+                # widget.WindowName(),
                 widget.Chord(
                     chords_colors={
                         "launch": ("#ff0000", "#ffffff"),
@@ -164,22 +186,51 @@ screens = [
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.CPU(
+                    format='CPU {load_percent}%', 
+                    padding = 10,
+                    mouse_callbacks={'Button1': lazy.spawn("ghostty -e btop")},),
+                widget.Memory(
+                    format='RAM {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}', 
+                    padding = 10,
+                    mouse_callbacks={'Button1': lazy.spawn("ghostty -e btop")},),
+                widget.Volume(
+                    fmt = "🔊 {}",            # Use an icon or text prefix
+                    mute_format = "🔇 Muted", # Text to show when muted
+                    padding = 10,
+                    scroll_delay = 0.5,
+                ),
+                widget.Clock(format="%Y-%m-%d %a %H:%M"),
                 widget.QuickExit(),
-            ],
+        ]
+
+screens = [
+    Screen(
+        bottom=bar.Bar(
+            widgets_list,
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
         ),
         background="#000000",
-        wallpaper=logo,
-        wallpaper_mode="center",
+        # wallpaper=logo,
+        # wallpaper_mode="center",
         # You can uncomment this variable if you see that on X11 floating resize/moving is laggy
         # By default we handle these events delayed to already improve performance, however your system might still be struggling
         # This variable is set to None (no cap) by default, but you can set it to 60 to indicate that you limit it to 60 events per second
         # x11_drag_polling_rate = 60,
     ),
 ]
+
+# Battery Append
+if has_battery():
+    widgets_list.insert(
+            7, 
+            widget.Battery(
+            format='{char} {percent:2.0%}',
+            # Adjust 'battery' name if yours is different (e.g., 'BAT1')
+            ),
+    )
 
 # Drag floating layouts.
 mouse = [
