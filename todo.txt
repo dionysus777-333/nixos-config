@@ -1,6 +1,6 @@
 add steam capability through modules
 add xautohook and i3lock for lock screen
-add qtile ethernet widget
+add qtile ethernet/wifi widget
 startup script to configure ui element and refresh rate desktop vs. laptop
 fix syncthing
 config script for folders (i.e. screenshots, syncthing) (maybe an installscript before anything even runs?)

@@ -170,6 +170,9 @@
     (aspellWithDicts (dicts: [dicts.en]))
     firefox
     nixfmt
+    spotify-player
+    bc
+    ffmpeg
   ];
   programs.zsh = {
   enable = true;
@@ -180,11 +183,11 @@
     packages = [
     "com.github.vikdevelop.photopea_app"
     "org.equicord.equibop"
-    "app.moosync.moosync"
     ];
   };
-
-
+  
+  # Locking
+  programs.i3lock.enable = true;
 
   # Disable Mouse Acceleration
   

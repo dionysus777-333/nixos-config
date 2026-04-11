@@ -16,5 +16,6 @@
     ./modules/fastfetch.nix
     ./modules/doom-emacs.nix
     ./modules/syncthing.nix
+    ./modules/xidlehook.nix
   ];
 }
