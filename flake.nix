@@ -7,6 +7,12 @@
     
     # nix-flatpak source
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+
+    # Doom Emacs Unstraightened source
+    nix-doom-emacs-unstraightened.url = "github:marienz/nix-doom-emacs-unstraightened";
+    # Optional, to download less. Neither the module nor the overlay uses this input.
+    nix-doom-emacs-unstraightened.inputs.nixpkgs.follows = "";
+
     # Stylix source
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
@@ -30,7 +36,7 @@
       specialArgs = { inherit inputs; };
       modules = [
         ./configuration.nix
-        
+
         # Import home-manager as a NixOS module
         home-manager.nixosModules.home-manager
         {
@@ -38,7 +44,7 @@
           home-manager.useUserPackages = true;
           # Point this to your existing home.nix
           home-manager.users.user = import ./home.nix;
-	  home-manager.extraSpecialArgs = { inherit inputs; };
+	        home-manager.extraSpecialArgs = { inherit inputs; };
         }
         stylix.nixosModules.stylix
         nix-flatpak.nixosModules.nix-flatpak

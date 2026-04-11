@@ -9,7 +9,7 @@
     opts = {
       number = true;         # Show line numbers
       relativenumber = true; # Show relative line numbers (great for motions)
-      shiftwidth = 1;        # Use 2 spaces for indent
+      shiftwidth = 2;        # Use 2 spaces for indent
       tabstop = 2;           # Tab width
       expandtab = true;      # Use spaces instead of tabs
       smartindent = true;    # Auto-indenting

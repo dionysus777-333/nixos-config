@@ -153,7 +153,7 @@ layout_theme = {
 }
 
 layouts = [
-    layout.Columns(**layout_theme),
+    layout.Columns(**layout_theme, num_columns=3),
     # layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),

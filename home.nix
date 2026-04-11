@@ -14,5 +14,6 @@
     ./modules/nixvim.nix
     ./modules/rofi.nix
     ./modules/fastfetch.nix
+    ./modules/doom-emacs.nix
   ];
 }

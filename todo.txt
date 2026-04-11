@@ -1,9 +1,6 @@
 add steam capability through modules
 add xautohook and i3lock for lock screen
 add qtile ethernet widget
-possibly make dynamic desktop/laptop switching for monitor and ui elements
-fix startup fastfetch console 
-startup script to configure settings desktop vs. laptop
-set terminal and serif fonts through stylix
+startup script to configure ui element and refresh rate desktop vs. laptop
 unstraightened doom emacs
 
