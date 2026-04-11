@@ -122,6 +122,7 @@
     rofi
     emacs
     (aspellWithDicts (dicts: [dicts.en]))
+    firefox
   ];
   programs.zsh = {
   enable = true;
@@ -133,8 +134,8 @@
     enable = true;
     uninstallUnmanaged = true;
     packages = [
-    # "com.github.vikdevelop.photopea_app"
-    # "org.equicord.equibop"
+    "com.github.vikdevelop.photopea_app"
+    "org.equicord.equibop"
     ];
   };
 

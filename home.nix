@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   home.username = "user"; 
@@ -11,5 +11,6 @@
     ./modules/qtile.nix
     ./modules/ghostty.nix
     ./modules/librewolf.nix
+    ./modules/nixvim.nix
   ];
 }

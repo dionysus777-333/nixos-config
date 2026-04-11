@@ -12,6 +12,11 @@
       url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixvim = {
+      # If you are not running an unstable channel of nixpkgs, select the corresponding branch
+      url = "github:nix-community/nixvim/nixos-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # Home Manager source
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -19,7 +24,7 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, nix-flatpak, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, stylix, nix-flatpak, nixvim, ... }@inputs: {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       specialArgs = { inherit inputs; };
@@ -33,6 +38,7 @@
           home-manager.useUserPackages = true;
           # Point this to your existing home.nix
           home-manager.users.user = import ./home.nix;
+	  home-manager.extraSpecialArgs = { inherit inputs; };
         }
         stylix.nixosModules.stylix
         nix-flatpak.nixosModules.nix-flatpak
