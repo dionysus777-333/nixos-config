@@ -12,5 +12,6 @@
     ./modules/ghostty.nix
     ./modules/librewolf.nix
     ./modules/nixvim.nix
+    ./modules/rofi.nix # WIP
   ];
 }

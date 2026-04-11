@@ -136,6 +136,7 @@
     packages = [
     "com.github.vikdevelop.photopea_app"
     "org.equicord.equibop"
+    "app.moosync.moosync"
     ];
   };
 

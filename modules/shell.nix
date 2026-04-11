@@ -9,10 +9,39 @@
     syntaxHighlighting.enable = true;
 
     shellAliases = {
-      ll = "ls -la";
-      gs = "git status";
+      # Nix specific
+      nx = "nix-shell";
+      nd = "nix develop";
+      nfu = "nix flake update";
+      # Clean up
+      nclean = "sudo nix-collect-garbage -d && nix-store --optimize";
+      # Navigation
+      ".."    = "cd ..";
+      "..."   = "cd ../..";
+      "...."  = "cd ../../..";
+      # Better Defaults
+      ls      = "ls --color=auto";
+      ll      = "ls -lh";
+      la      = "ls -a";
+      lla     = "ls -lah";
+      grep    = "grep --color=auto";
+      # General System
       rebuild = "sudo nixos-rebuild switch --flake /home/user/nixos-config#nixos";
       restart = "sudo reboot now";
+      # Git (because who wants to type 'git'?)
+      g = "git";
+      gs = "git status";
+      ga = "git add";
+      gc = "git commit -m";
+      gp = "git push";
+      # System & Network
+      df      = "df -h";
+      free    = "free -m";
+      myip    = "curl -s https://ifconfig.me";
+      ports   = "sudo ss -tulanp";
+      # Helpers
+      untar   = "tar -zxvf";
+      up      = "nix-channel --update && nix-env -u";
     };
   };
 

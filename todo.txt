@@ -1,14 +1,9 @@
-add common aliases to shell script
-add nixvim
 add steam capability through modules
 add xautohook and i3lock for lock screen
 add qtile ethernet widget
 possibly make dynamic desktop/laptop switching for monitor and ui elements
-npins
 fix startup fastfetch console 
-fix fastfetch startup
 startup script to configure settings desktop vs. laptop
-get rofi dark
 set terminal and serif fonts through stylix
 unstraightened doom emacs
 
