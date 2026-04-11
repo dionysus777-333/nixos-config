@@ -2,40 +2,26 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-
-let
-  # External let binding to fetch nix-flatpak without 
-  # causing infinite recursion.
-  pkgs = import <nixpkgs> {};
-  
-  nix-flatpak = pkgs.fetchFromGitHub {
-    owner = "gmodena";
-    repo = "nix-flatpak";
-    rev = "v0.6.0";
-    hash = "sha256-iAVVHi7X3kWORftY+LVbRiStRnQEob2TULWyjMS6dWg=";
-  };
-in
-
-
-{ config, pkgs, ... }:
-
+{ config, pkgs, lib, inputs, ... }:
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      <home-manager/nixos>
-      "${nix-flatpak}/modules/nixos.nix"
     ];
+
+  nix.registry.nixpkgs.flake = inputs.nixpkgs;
+  nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.initrd.systemd.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+
   # Plymouth
   boot.plymouth = {
     enable = true;
-    theme = "bgrt"; 
+    theme = lib.mkForce "bgrt"; 
   };
   boot.consoleLogLevel = 3;
   boot.initrd.verbose = false;
@@ -48,11 +34,18 @@ in
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable flakes
-  # nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = ["nix-command" "flakes"];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+
+  # Stylix
+  stylix = {
+    enable = true;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/irblack.yaml";
+  };
+
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -74,6 +67,7 @@ in
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
+
 
   # Configure keymap in X11
   services.xserver = {
@@ -113,7 +107,6 @@ in
     git
     gh
     alsa-utils
-    rofi
     dunst
     btop
     fastfetch
@@ -126,6 +119,9 @@ in
     libreoffice
     tree
     nix-tree
+    rofi
+    emacs
+    (aspellWithDicts (dicts: [dicts.en]))
   ];
   programs.zsh = {
   enable = true;
@@ -137,12 +133,12 @@ in
     enable = true;
     uninstallUnmanaged = true;
     packages = [
-    "com.github.vikdevelop.photopea_app"
+    # "com.github.vikdevelop.photopea_app"
+    # "org.equicord.equibop"
     ];
   };
 
-  # Enable Home Manager
-  home-manager.users.user = import ./home.nix;
+
 
   # Disable Mouse Acceleration
   
@@ -156,6 +152,7 @@ in
       };
     };
 
+  
    # Virtualbox
    virtualisation.virtualbox.host.enable = true;
    users.extraGroups.vboxusers.members = [ "user" ];

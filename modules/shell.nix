@@ -11,7 +11,7 @@
     shellAliases = {
       ll = "ls -la";
       gs = "git status";
-      rebuild = "sudo nixos-rebuild switch -I nixos-config=$HOME/nixos-config/configuration.nix";
+      rebuild = "sudo nixos-rebuild switch --flake /home/user/nixos-config#nixos";
       restart = "sudo reboot now";
     };
   };
@@ -23,5 +23,7 @@
     bat        # better cat
     fd         # better find
     ripgrep    # fast grep
+  ];
+  home.sessionPath = [
   ];
 }
