@@ -15,5 +15,6 @@
     ./modules/rofi.nix
     ./modules/fastfetch.nix
     ./modules/doom-emacs.nix
+    ./modules/syncthing.nix
   ];
 }

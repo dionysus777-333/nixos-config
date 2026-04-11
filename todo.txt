@@ -2,5 +2,8 @@ add steam capability through modules
 add xautohook and i3lock for lock screen
 add qtile ethernet widget
 startup script to configure ui element and refresh rate desktop vs. laptop
-unstraightened doom emacs
-
+fix syncthing
+config script for folders (i.e. screenshots, syncthing) (maybe an installscript before anything even runs?)
+(small) if in plymouth I get password wrong, it asks me to type it twice, once for the full drive and once for the "disk root"
+plymouth spinning nix logo with clean LY-like password entry 
+raspberry pi miniserver for temp NAS and to learn docker

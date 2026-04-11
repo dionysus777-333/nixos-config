@@ -21,8 +21,22 @@
   # Plymouth
   boot.plymouth = {
     enable = true;
-    theme = lib.mkForce "bgrt"; 
+    theme = lib.mkForce "bgrt";
+    font = "${pkgs.nerd-fonts.jetbrains-mono}/share/fonts/truetype/NerdFonts/JetBrainsMono/JetBrainsMonoNerdFont-Regular.ttf";
   };
+
+  console = {
+    packages = [ pkgs.terminus_font ];
+    font = "ter-v16n";
+    colors = [
+    "000000" "ff6c60" "a8ff60" "ffffb6"
+    "96cbfe" "ff73fd" "c6c5fe" "fdfbee"
+    "000000" "e9c062" "242422" "484844"
+    "6c6c66" "b18a3d" "918f88" "b5b3aa"
+    ];
+  };
+
+
   boot.consoleLogLevel = 3;
   boot.initrd.verbose = false;
   boot.kernelParams = [ "quiet" "splash" "udev.log_level=3" "systemd.show_status=auto" ];
@@ -158,9 +172,6 @@
     nixfmt
   ];
   programs.zsh = {
-  enable = true;
-  };
-  services.syncthing = {
   enable = true;
   };
   services.flatpak = {
