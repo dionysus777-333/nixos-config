@@ -2,6 +2,21 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
+
+let
+  # External let binding to fetch nix-flatpak without 
+  # causing infinite recursion.
+  pkgs = import <nixpkgs> {};
+  
+  nix-flatpak = pkgs.fetchFromGitHub {
+    owner = "gmodena";
+    repo = "nix-flatpak";
+    rev = "v0.6.0";
+    hash = "sha256-iAVVHi7X3kWORftY+LVbRiStRnQEob2TULWyjMS6dWg=";
+  };
+in
+
+
 { config, pkgs, ... }:
 
 {
@@ -9,6 +24,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       <home-manager/nixos>
+      "${nix-flatpak}/modules/nixos.nix"
     ];
 
   # Bootloader.
@@ -72,6 +88,7 @@
        };
   };
   services.displayManager.ly.enable = true;
+  xdg.portal.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.user = {
@@ -104,12 +121,24 @@
     xclip
     keyutils
     qimgv
+    unzip
+    unrar
+    libreoffice
+    tree
+    nix-tree
   ];
   programs.zsh = {
   enable = true;
   };
   services.syncthing = {
   enable = true;
+  };
+  services.flatpak = {
+    enable = true;
+    uninstallUnmanaged = true;
+    packages = [
+    "com.github.vikdevelop.photopea_app"
+    ];
   };
 
   # Enable Home Manager
