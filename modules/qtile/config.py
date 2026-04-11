@@ -146,14 +146,20 @@ for i in groups:
     )
 
 layout_theme = {
-    "border_width": 2,
-    "margin": 2,
-    "border_focus": "#5C82FF",  # Your active window highlight color
-    "border_normal": "#1D2330",   # Your inactive window color
 }
 
 layouts = [
-    layout.Columns(**layout_theme, num_columns=3),
+    layout.Columns(
+        border_width=2,
+        margin=2,
+        border_focus="#5C82FF",  
+        border_normal="#1D2330",  
+        insert_position=1, 
+        fair=True,         # This handles the 3x2 distribution logic
+        split=True,
+        num_columns=3,
+        border_on_single=True, # Recommended: keeps the border even if only 1 window is open
+        ),
     # layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
