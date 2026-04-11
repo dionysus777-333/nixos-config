@@ -36,8 +36,11 @@ from libqtile.utils import guess_terminal
 # Startup Fastfetch
 @hook.subscribe.startup_once
 def autostart():
-    subprocess.Popen(['ghostty', '-e', "sh -c 'fastfetch; exec $SHELL'"])
-    
+  subprocess.Popen([
+      'ghostty', 
+      '-e', 
+      'zsh', '-c', 'fastfetch; exec zsh'
+  ])    
 
 # Scripts!!
 def has_battery():
