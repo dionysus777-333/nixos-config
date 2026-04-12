@@ -2,12 +2,56 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, inputs, host, conftype, ui, ... }:
+let
+  server = with pkgs; [
+    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    htop
+    ffmpeg
+    git
+    gh
+    unzip
+    unrar
+    xclip
+    tree
+    nix-tree
+    bc
+    kdePackages.kleopatra
+  ];
+  minimal = server ++ (with pkgs;
+  [
+    ghostty
+    librewolf
+    keepassxc
+    alsa-utils
+    dunst
+    btop
+    fastfetch
+    scrot
+    keyutils
+    qimgv
+    libreoffice
+    rofi
+    emacs
+    spotify-player
+    evtest
+  ]);
+  extra = minimal ++ (with pkgs; 
+  [
+    electrum 
+    feather
+  ]);
+in
 {
   imports =
-    [ # Include the results of the hardware scan.
+    if conftype == "E"
+    then [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-    ];
+      ./extra.nix
+    ]
+    else [ ./hardwareconfiguration.nix ];
+
 
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
@@ -27,7 +71,7 @@
 
   console = {
     packages = [ pkgs.terminus_font ];
-    font = "ter-v16n";
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-v16n.psf.gz";
     colors = [
     "000000" "ff6c60" "a8ff60" "ffffb6"
     "96cbfe" "ff73fd" "c6c5fe" "fdfbee"
@@ -48,8 +92,7 @@
   boot.loader.timeout = 0;
   boot.loader.systemd-boot.consoleMode = "max";
 
-  boot.initrd.luks.devices."luks-fa239893-7e85-4493-b090-913fce0bc8c3".device = "/dev/disk/by-uuid/fa239893-7e85-4493-b090-913fce0bc8c3";
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = host; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable flakes
@@ -89,14 +132,40 @@
     };
 
     sizes = {
-      applications = 12;
-      terminal = 14;
-      desktop = 10;
-      popups = 10;
+      applications = 
+        if ui == "L" then 13
+        else 11;
+      terminal = 
+        if ui == "L" then 14
+        else 12;
+      desktop = 
+        if ui == "L" then 13
+        else 11;
+      popups = 
+        if ui == "L" then 13
+        else 11;
     };
    };
   };
 
+  i18n.inputMethod = {
+  type = "fcitx5";
+  enable = lib.mkIf (conftype != "S") true;
+  fcitx5.addons = with pkgs; [
+    fcitx5-mozc
+    fcitx5-gtk
+    ];
+  };
+
+  services.xserver.displayManager.setupCommands = 
+    if ui == "D" then 
+      ''
+      ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --mode 2560x1440 --rate 165
+      ''
+    else 
+      ''
+      ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1 --mode 1920x1080 --rate 120
+      '';
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -124,15 +193,18 @@
   services.xserver = {
     enable = true;
     desktopManager.xterm.enable = false;
+    dpi = 
+      if ui == "L" then 144
+      else 96;
     windowManager.qtile = {
-       enable = true;
+       enable = lib.mkIf (conftype != "S") true;
        };
     xkb = {
        layout = "us";
        variant = "";
        };
   };
-  services.displayManager.ly.enable = true;
+  services.displayManager.ly.enable = lib.mkIf (conftype != "S") true;
   xdg.portal.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -149,46 +221,25 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    neovim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    wget
-    ghostty
-    librewolf
-    keepassxc
-    git
-    gh
-    alsa-utils
-    dunst
-    btop
-    fastfetch
-    scrot
-    xclip
-    keyutils
-    qimgv
-    unzip
-    unrar
-    libreoffice
-    tree
-    nix-tree
-    rofi
-    emacs
-    (aspellWithDicts (dicts: [dicts.en]))
-    firefox
-    nixfmt
-    spotify-player
-    bc
-    ffmpeg
-    electrum
-    feather
-  ];
+  environment.systemPackages = 
+    if conftype == "E" then extra
+    else if conftype == "M" then minimal
+    else if conftype == "S" then server
+    else server;
+
   programs.zsh = {
   enable = true;
   };
+
+
   services.flatpak = {
     enable = true;
     uninstallUnmanaged = true;
     packages = [
     "com.github.vikdevelop.photopea_app"
+    ]
+    ++ lib.optionals (conftype == "E")
+    [
     "org.equicord.equibop"
     ];
   };
@@ -209,9 +260,7 @@
     };
 
   
-   # Virtualbox
-   virtualisation.virtualbox.host.enable = true;
-   users.extraGroups.vboxusers.members = [ "user" ];
+
 
   
 

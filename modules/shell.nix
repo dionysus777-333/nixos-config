@@ -1,5 +1,5 @@
-{ config, pkgs, ... }:
-
+{ config, pkgs, host, ... }:
+let nixname = host; in
 {
   programs.zsh = {
     enable = true;
@@ -26,7 +26,7 @@
       lla     = "ls -lah";
       grep    = "grep --color=auto";
       # General System
-      rebuild = "sudo nixos-rebuild switch --flake /home/user/nixos-config#nixos";
+      rebuild = "sudo nixos-rebuild switch --flake /home/user/nixos-config#${nixname}";
       restart = "sudo reboot now";
       # Git (because who wants to type 'git'?)
       g = "git";

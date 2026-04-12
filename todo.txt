@@ -1,9 +1,6 @@
-add steam capability through modules
-add xautohook and i3lock for lock screen
 add qtile ethernet/wifi widget
-startup script to configure ui element and refresh rate desktop vs. laptop
-fix syncthing
-config script for folders (i.e. screenshots, syncthing) (maybe an installscript before anything even runs?)
 (small) if in plymouth I get password wrong, it asks me to type it twice, once for the full drive and once for the "disk root"
 plymouth spinning nix logo with clean LY-like password entry 
-raspberry pi miniserver for temp NAS and to learn docker
+the hardwareconfig issue can just be resolved by just adjoining the rebuild bash abbreviation to include a copying of the /etc/nixos/hardware-configuration.nix in if it exists. that way on the first install script when it rebuilds, it does this automatically. the dummy hardwareconfig file (if we even wanna do that) can be the one uploaded to github by using a duplicate folder and stow magickery.
+server exclusive docker config
+have the installscript copy hardware config and encryption stuff if it exists and stuff

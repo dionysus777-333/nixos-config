@@ -12,5 +12,6 @@
   };
   # Ensure Screenshots folder exists inside Pictures
   home.file."Pictures/Screenshots/.keep".text = "";
+  # Ensure psswds folder exists
   home.file."psswds/.keep".text = "";
 }
