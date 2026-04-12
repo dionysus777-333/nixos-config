@@ -36,6 +36,11 @@
     ];
   };
 
+  systemd.tmpfiles.rules = [
+    "d /mnt 0755 root root -"
+    "d /mnt/usb 0755 root root -"
+  ];
+
 
   boot.consoleLogLevel = 3;
   boot.initrd.verbose = false;
@@ -173,6 +178,8 @@
     spotify-player
     bc
     ffmpeg
+    electrum
+    feather
   ];
   programs.zsh = {
   enable = true;

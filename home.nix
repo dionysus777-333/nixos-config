@@ -6,6 +6,7 @@
   home.stateVersion = "25.11";
 
   imports = [
+    ./modules/filetree.nix
     ./modules/shell.nix
     ./modules/git.nix
     ./modules/qtile.nix
