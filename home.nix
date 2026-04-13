@@ -15,10 +15,12 @@ let
     ./modules/doom-emacs.nix
     ./modules/syncthing.nix
     ./modules/xidlehook.nix
+    ./modules/fcitx5.nix
   ];
   extra = minimal ++ [
     ./modules/brave.nix
     ./modules/steam.nix
+    ./modules/firefox.nix
   ];
 in
 {

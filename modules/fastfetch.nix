@@ -1,9 +1,11 @@
-{ inputs, pkgs, config, ... }: {
+{ inputs, pkgs, config, ui, ... }: {
  programs.fastfetch = {
   enable = true;
   settings = {
     logo = {
-      source = "nixos_small";
+      source = 
+        if ui == "L" then "nixos_small"
+        else "nixos";
       padding = {
         right = 1;
       };

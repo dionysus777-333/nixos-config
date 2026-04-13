@@ -36,6 +36,9 @@ let
     emacs
     spotify-player
     evtest
+    mullvad-vpn
+    kdePackages.kiten
+    anki
   ]);
   extra = minimal ++ (with pkgs; 
   [
@@ -102,10 +105,6 @@ in
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Monitor Refresh Rate
-
-
-
   # Stylix
   stylix = {
    enable = true;
@@ -156,6 +155,7 @@ in
     fcitx5-gtk
     ];
   };
+  services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
   services.xserver.displayManager.setupCommands = 
     if ui == "D" then 
