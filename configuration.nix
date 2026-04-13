@@ -35,6 +35,7 @@ let
     emacs
     evtest
     lact
+    yazi
   ]);
   extra = minimal ++ (with pkgs; 
   [
@@ -142,6 +143,10 @@ in
    };
   };
 
+  programs.dconf.profiles.user.databases = [{
+   settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
+  }];
+
   i18n.inputMethod = {
   type = "fcitx5";
   enable = lib.mkIf (conftype != "S") true;
@@ -152,7 +157,7 @@ in
   };
   services.xserver.desktopManager.runXdgAutostartIfNone = true;
 
-  services.xserver.displayManager.setupCommands = 
+  services.xserver.displayManager.sessionCommands = 
     if ui == "D" then 
       ''
       ${pkgs.xorg.xrandr}/bin/xrandr --output DP-1 --mode 2560x1440 --rate 165

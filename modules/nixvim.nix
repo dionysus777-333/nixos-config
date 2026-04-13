@@ -9,10 +9,13 @@
     opts = {
       number = true;         # Show line numbers
       relativenumber = true; # Show relative line numbers (great for motions)
-      shiftwidth = 2;        # Use 2 spaces for indent
+      shiftwidth = 2;        # Use 1 spaces for indent
       tabstop = 2;           # Tab width
       expandtab = true;      # Use spaces instead of tabs
       smartindent = true;    # Auto-indenting
+      cpoptions = "I";
+      autoindent = true;
+      breakindent = true;
       mouse = "a";           # Enable mouse support
       ignorecase = true;     # Case-insensitive search
       smartcase = true;      # ...until you use a capital letter
@@ -31,6 +34,10 @@
       treesitter = {
         enable = true;
         nixGrammars = true;
+        settings = {
+          indent.enable = true; # Add this!
+          highlight.enable = true;
+        };
       };
 
       # LSP & Completion
@@ -51,6 +58,6 @@
       illuminate.enable = true; # Highlight other uses of word under cursor 
       todo-comments.enable = true;
       indent-blankline.enable = true;
-    };
+    };                                                                         
   };
 }

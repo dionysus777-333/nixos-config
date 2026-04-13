@@ -172,7 +172,7 @@ layouts = [
 widget_defaults = dict(
     font="DejaVu Sans",
     fontsize=11,
-    padding=3,
+    padding=10,
 )
 extension_defaults = widget_defaults.copy()
 
@@ -182,7 +182,12 @@ widgets_list = [
               # widget.CurrentLayout(),
                 widget.Prompt(),
                 widget.Spacer(),
-                widget.GroupBox(),
+                widget.GroupBox(
+                    this_current_screen_border = "#96cbfe",
+                    urgent_border = "#ff6c60",
+                    rounded = False,
+                    padding = 3,
+                ),
                 widget.Spacer(),
                 # widget.WindowName(),
                 widget.Chord(
@@ -194,18 +199,18 @@ widgets_list = [
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
                 widget.Systray(),
+                widget.Net(
+                    mouse_callbacks={'Button1': lazy.spawn("ghostty -e nmtui")}
+                ),
                 widget.CPU(
                     format='CPU {load_percent}%', 
-                    padding = 10,
                     mouse_callbacks={'Button1': lazy.spawn("ghostty -e btop")},),
                 widget.Memory(
                     format='RAM {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}', 
-                    padding = 10,
                     mouse_callbacks={'Button1': lazy.spawn("ghostty -e btop")},),
                 widget.Volume(
                     fmt = "🔊 {}",            # Use an icon or text prefix
                     mute_format = "🔇 Muted", # Text to show when muted
-                    padding = 10,
                     scroll_delay = 0.5,
                 ),
                 widget.Clock(format="%Y-%m-%d %a %H:%M"),
