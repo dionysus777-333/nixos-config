@@ -2,12 +2,10 @@
   programs.git = {
     enable = true;
 
-    userName = "dionysus777-333";
-    userEmail = "eric.z.dino@outlook.com";
-
     extraConfig = {
       init.defaultBranch = "main";
       pull.rebase = true;
+      credential.helper = "store"; # or libsecret
     };
 
     aliases = {
