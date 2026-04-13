@@ -110,6 +110,7 @@ keys = [
     Key([mod], "o", lazy.spawn("amixer sset Master 5%-")),
     Key([mod], "i", lazy.spawn("amixer sset Master toggle"), desc="Toggle Mute"),
     Key([mod, "Shift"], "s", lazy.spawn("scrot -s -f '%Y-%m-%d_%H%M%S.png' -e 'xclip -selection clipboard -t image/png -i $f; mv $f ~/Pictures/Screenshots/'"), desc="Screenshot"),
+    Key([mod], "d", lazy.spawn("betterlockscreen -l"), desc="Lock"),
 ]
 
 # Add key bindings to switch VTs in Wayland.
@@ -142,7 +143,7 @@ for i in groups:
             Key(
                 [mod, "shift"],
                 i.name,
-                lazy.window.togroup(i.name, switch_group=True),
+                lazy.window.togroup(i.name, switch_group=False),
                 desc=f"Switch to & move focused window to group {i.name}",
             ),
             # Or, use below if you prefer not to switch to that group.
@@ -158,32 +159,19 @@ layout_theme = {
 layouts = [
     layout.Columns(
         border_width=2,
-        margin=2,
-        border_focus="#5C82FF",  
-        border_normal="#1D2330",  
-        insert_position=1, 
-        fair=True,         # This handles the 3x2 distribution logic
+        margin=3,
+        border_on_single=False,     
+        margin_on_single=0,
+        border_focus="#96cbfe",  
+        border_normal="#000000",
         split=True,
-        num_columns=3,
-        border_on_single=True, # Recommended: keeps the border even if only 1 window is open
-        ),
+    ),
     # layout.Max(),
-    # Try more layouts by unleashing below layouts.
-    # layout.Stack(num_stacks=2),
-    # layout.Bsp(),
-    # layout.Matrix(),
-    # layout.MonadTall(),
-    # layout.MonadWide(),
-    # layout.RatioTile(),
-    # layout.Tile(),
-    # layout.TreeTab(),
-    # layout.VerticalTile(),
-    # layout.Zoomy(),
 ]
 
 widget_defaults = dict(
-    font="sans",
-    fontsize=12,
+    font="DejaVu Sans",
+    fontsize=11,
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
@@ -222,7 +210,7 @@ widgets_list = [
                 ),
                 widget.Clock(format="%Y-%m-%d %a %H:%M"),
                 widget.QuickExit(),
-        ]
+]
 
 screens = [
     Screen(

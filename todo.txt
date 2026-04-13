@@ -3,4 +3,4 @@ add qtile ethernet/wifi widget
 plymouth spinning nix logo with clean LY-like password entry 
 the hardwareconfig issue can just be resolved by just adjoining the rebuild bash abbreviation to include a copying of the /etc/nixos/hardware-configuration.nix in if it exists. that way on the first install script when it rebuilds, it does this automatically. the dummy hardwareconfig file (if we even wanna do that) can be the one uploaded to github by using a duplicate folder and stow magickery.
 server exclusive docker config
-have the installscript copy hardware config and encryption stuff if it exists and stuff
+have the installscript copy hardware config and encryption stuff if it exists and stuff (note that I moved the rootinitrd of the root decryption into hardwareconfig)

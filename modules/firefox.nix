@@ -122,6 +122,7 @@
       [
         ublock-origin
         inputs.firefox-addons.packages."x86_64-linux"."10ten-ja-reader"
+        yomitan
       ];
     };
     policies = {
@@ -130,9 +131,13 @@
          installation_mode = "force_installed";
          install_url = "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi";
        };
-       "10ten-ja-reader@0x90.org" = {
+       "59812185-ea92-4cca-8ab7-cfcacee81281" = {
          installation_mode = "force_installed";
          install_url = "https://addons.mozilla.org/firefox/downloads/latest/10ten-ja-reader/latest.xpi";
+       };
+       "6b733b82-9261-47ee-a595-2dda294a4d08" = {
+         installation_mode = "force_installed";
+         install_url = "https://addons.mozilla.org/firefox/downloads/latest/yomitan/latest.xpi";
        };
      };
      DisableTelemetry = true;

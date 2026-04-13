@@ -4,6 +4,7 @@
     mangohud           # Performance overlay
     gamemode           # Optimization tool
     bottles            # For non-Steam Windows games
+    gamescope
   ];
   programs.mangohud = {
    enable = true;

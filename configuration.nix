@@ -31,29 +31,24 @@ let
     scrot
     keyutils
     qimgv
-    libreoffice
     rofi
     emacs
-    spotify-player
     evtest
-    mullvad-vpn
-    kdePackages.kiten
-    anki
+    lact
   ]);
   extra = minimal ++ (with pkgs; 
   [
     electrum 
     feather
+    kdePackages.kiten
+    anki
+    spotify-player
+    mullvad-vpn
+    libreoffice
   ]);
 in
 {
-  imports =
-    if conftype == "E"
-    then [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./extra.nix
-    ]
-    else [ ./hardwareconfiguration.nix ];
+  imports = [ ./hardware-configuration.nix ];
 
 
   nix.registry.nixpkgs.flake = inputs.nixpkgs;
@@ -230,6 +225,21 @@ in
   programs.zsh = {
   enable = true;
   };
+
+  programs.steam = {
+    enable = lib.mkIf (conftype == "E") true;
+    extraCompatPackages = with pkgs; [
+      proton-ge-bin
+    ];
+    remotePlay.openFirewall = false;
+  };
+  programs.gamemode.enable = lib.mkIf (conftype == "E") true;
+
+  hardware.graphics.enable32Bit = true;
+
+  # Virtualbox
+  virtualisation.virtualbox.host.enable = lib.mkIf (conftype == "E") true;
+  users.extraGroups.vboxusers.members = [ "user" ];
 
 
   services.flatpak = {
