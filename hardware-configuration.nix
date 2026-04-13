@@ -14,7 +14,11 @@
   boot.extraModulePackages = [ ];
 
   boot.initrd.luks.devices."root".device = "/dev/disk/by-partlabel/cryptroot";
-  boot.initrd.luks.devices."swap".device = "/dev/disk/by-partlabel/cryptswap";
+  boot.initrd.luks.devices."swap" = {
+    device = "/dev/disk/by-partlabel/cryptswap";
+    preLVM = true;
+    allowDiscards = true;
+  };
 
   fileSystems."/" =
     { device = "/dev/mapper/root";
@@ -23,14 +27,16 @@
 
   
   fileSystems."/boot" =
-    { device = "/dev/disk/by-label/boot";
+    { device = "/dev/disk/by-label/BOOT";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices =
-    [ { device = "/dev/mapper/swap"; }
-    ];
+   swapDevices = [ 
+     { 
+     device = "/dev/mapper/swap";
+     }
+   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;

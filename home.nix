@@ -16,9 +16,9 @@ let
     ./modules/syncthing.nix
     ./modules/xidlehook.nix
     ./modules/fcitx5.nix
+    ./modules/defaults.nix
   ];
   extra = minimal ++ [
-    ./modules/brave.nix
     ./modules/steam.nix
     ./modules/firefox.nix
   ];
