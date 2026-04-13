@@ -18,6 +18,7 @@ let
     nix-tree
     bc
     kdePackages.kleopatra
+    jq
   ];
   minimal = server ++ (with pkgs;
   [

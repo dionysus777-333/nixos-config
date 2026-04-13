@@ -62,11 +62,11 @@
         };
     in
   {
-    nixosConfigurations = {
-      nixD = mkHost { name = "nixD"; conftype = "E"; ui = "D"; };
-      nixL = mkHost { name = "nixL"; conftype = "E"; ui = "L"; };
-      nixM = mkHost { name = "nixM"; conftype = "M"; ui = "L"; };
-      nixS = mkHost { name = "nixS"; conftype = "S"; };
+    nixosConfigurations = { 
+      nixD = mkHost { name = "nixD"; conftype = "E"; ui = "D"; }; # sudo nixos-rebuild switch --flake .#nixD
+      nixL = mkHost { name = "nixL"; conftype = "E"; ui = "L"; }; # sudo nixos-rebuild switch --flake .#nixL
+      nixM = mkHost { name = "nixM"; conftype = "M"; ui = "L"; }; # sudo nixos-rebuild switch --flake .#nixM
+      nixS = mkHost { name = "nixS"; conftype = "S"; }; # sudo nixos-rebuild switch --flake .#nixS
       default = self.nixDesktop;
     };
   };

@@ -8,27 +8,28 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usb_storage" "usbhid" "sd_mod" ];
+  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "thunderbolt" "usbhid" ];
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-amd" ];
   boot.extraModulePackages = [ ];
 
+  boot.initrd.luks.devices."root".device = "/dev/disk/by-partlabel/cryptroot";
+  boot.initrd.luks.devices."swap".device = "/dev/disk/by-partlabel/cryptswap";
+
   fileSystems."/" =
-    { device = "/dev/mapper/luks-ae2c25e4-7ebe-4bba-92fd-3e404b8ae13a";
+    { device = "/dev/mapper/root";
       fsType = "ext4";
     };
 
-  boot.initrd.luks.devices."luks-ae2c25e4-7ebe-4bba-92fd-3e404b8ae13a".device = "/dev/disk/by-uuid/ae2c25e4-7ebe-4bba-92fd-3e404b8ae13a";
-  boot.initrd.luks.devices."luks-fa239893-7e85-4493-b090-913fce0bc8c3".device = "/dev/disk/by-uuid/fa239893-7e85-4493-b090-913fce0bc8c3";
-
+  
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/2763-C20C";
+    { device = "/dev/disk/by-label/boot";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
   swapDevices =
-    [ { device = "/dev/mapper/luks-fa239893-7e85-4493-b090-913fce0bc8c3"; }
+    [ { device = "/dev/mapper/swap"; }
     ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
