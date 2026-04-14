@@ -24,7 +24,6 @@ let
   [
     ghostty
     librewolf
-    keepassxc
     alsa-utils
     dunst
     btop
@@ -37,6 +36,7 @@ let
     evtest
     lact
     yazi
+    # keepassxc
   ]);
   extra = minimal ++ (with pkgs; 
   [

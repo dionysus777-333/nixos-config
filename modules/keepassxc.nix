@@ -1,10 +1,14 @@
 { pkgs, inputs, ... }:
 {
- programs.keepassxc.settings = {
-    # GUI
+ programs.keepassxc = {
+  enable = true;
+  settings = {
+   GUI = {
     ApplicationTheme = "dark";
-
-    # Security
-    Security_LockDatabaseIdleSeconds = 30;
+   };
+   Security = {
+    LockDatabaseIdleSeconds = 30;
+   };
   };
+ };
 }

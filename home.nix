@@ -17,6 +17,7 @@ let
     ./modules/xidlehook.nix
     ./modules/fcitx5.nix
     ./modules/defaults.nix
+    ./modules/keepassxc.nix
   ];
   extra = minimal ++ [
     ./modules/steam.nix
