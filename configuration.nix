@@ -25,7 +25,6 @@ let
     ghostty
     librewolf
     alsa-utils
-    dunst
     btop
     fastfetch
     scrot

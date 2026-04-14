@@ -18,6 +18,8 @@ let
     ./modules/fcitx5.nix
     ./modules/defaults.nix
     ./modules/keepassxc.nix
+    ./modules/dunst.nix
+    ./modules/stylix.nix
   ];
   extra = minimal ++ [
     ./modules/steam.nix
