@@ -58,7 +58,7 @@ in
       {
         # Lock screen after 10 minutes (600 seconds)
         delay = 600;
-        command = "${pkgs.betterlockscreen}/bin/betterlockscreen -l blur";
+        command = "${pkgs.betterlockscreen}/bin/betterlockscreen -l";
       }
       {
         # Turn off screen 30 seconds after locking
