@@ -1,6 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, ui, ... }:
 
 {
   xdg.configFile."qtile/config.py".source =
-    ./qtile/config.py;
+    if ui == "L" then ./qtile/configL.py
+    else ./qtile/configD.py;
 }
+
