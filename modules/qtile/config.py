@@ -49,6 +49,7 @@ def autostartE():
     # Run it
     subprocess.Popen(cmd)
 
+
 # Scripts!!
 def has_battery():
     # Typically batteries are named BAT0, BAT1, etc. in this directory
