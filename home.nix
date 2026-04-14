@@ -22,6 +22,7 @@ let
   extra = minimal ++ [
     ./modules/steam.nix
     ./modules/firefox.nix
+    ./modules/retroarch.nix
   ];
 in
 {

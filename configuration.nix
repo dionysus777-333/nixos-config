@@ -36,7 +36,6 @@ let
     evtest
     lact
     yazi
-    # keepassxc
   ]);
   extra = minimal ++ (with pkgs; 
   [
