@@ -1,3 +1,10 @@
+{ pkgs, inputs, ... }:
 {
-  xdg.configFile."keepassxc/keepassxc.ini".source = ./keepassxc/keepassxc.ini;
+ programs.keepassxc.settings = {
+    # GUI
+    ApplicationTheme = "dark";
+
+    # Security
+    Security_LockDatabaseIdleSeconds = 30;
+  };
 }

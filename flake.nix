@@ -39,11 +39,11 @@
     let
       system = "x86_64-linux";
       
-      mkHost = { name, conftype, ui, extraArgs ? {} }:
+      mkHost = { name, conftype, ui, arch, extraArgs ? {} }:
         nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
-            inherit inputs conftype ui;
+            inherit inputs conftype ui arch;
             host = name;
           } // extraArgs; 
           modules = [ 
@@ -63,9 +63,9 @@
     in
   {
     nixosConfigurations = { 
-      nixD = mkHost { name = "nixD"; conftype = "E"; ui = "D"; }; # sudo nixos-rebuild switch --flake .#nixD
-      nixL = mkHost { name = "nixL"; conftype = "E"; ui = "L"; }; # sudo nixos-rebuild switch --flake .#nixL
-      nixM = mkHost { name = "nixM"; conftype = "M"; ui = "L"; }; # sudo nixos-rebuild switch --flake .#nixM
+      nixD = mkHost { name = "nixD"; conftype = "E"; ui = "D"; arch = "AMD"; }; # sudo nixos-rebuild switch --flake .#nixD
+      nixL = mkHost { name = "nixL"; conftype = "E"; ui = "L"; arch = "INT"; }; # sudo nixos-rebuild switch --flake .#nixL
+      nixM = mkHost { name = "nixM"; conftype = "M"; ui = "L"; arch = "INT"; }; # sudo nixos-rebuild switch --flake .#nixM
       nixS = mkHost { name = "nixS"; conftype = "S"; }; # sudo nixos-rebuild switch --flake .#nixS
       default = self.nixDesktop;
     };
