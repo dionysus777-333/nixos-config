@@ -50,11 +50,6 @@ def autostartE():
     subprocess.Popen(cmd)
 
 
-# Scripts!!
-def has_battery():
-    # Typically batteries are named BAT0, BAT1, etc. in this directory
-    return len(os.listdir('/sys/class/power_supply/')) > 0
-
 mod = "mod4"
 terminal = guess_terminal()
 browser = "librewolf"
@@ -181,14 +176,14 @@ logo = os.path.join(os.path.dirname(libqtile.resources.__file__), "logo.png")
 
 widgets_list = [
               # widget.CurrentLayout(),
-                widget.Prompt(),
-                widget.Spacer(),
                 widget.GroupBox(
                     this_current_screen_border = "#96cbfe",
                     urgent_border = "#ff6c60",
                     rounded = False,
                     padding = 3,
                 ),
+                widget.Prompt(),
+                # widget.Spacer(),
                 widget.Spacer(),
                 # widget.WindowName(),
                 widget.Chord(
@@ -199,7 +194,7 @@ widgets_list = [
                 ),
                 # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
                 # widget.StatusNotifier(),
-                widget.Systray(),
+                widget.Battery(),
                 widget.Net(
                     mouse_callbacks={'Button1': lazy.spawn("ghostty -e nmtui")}
                 ),
@@ -209,6 +204,7 @@ widgets_list = [
                 widget.Memory(
                     format='RAM {MemUsed: .0f}{mm}/{MemTotal: .0f}{mm}', 
                     mouse_callbacks={'Button1': lazy.spawn("ghostty -e btop")},),
+                widget.Systray(),
                 widget.Volume(
                     fmt = "🔊 {}",            # Use an icon or text prefix
                     mute_format = "🔇 Muted", # Text to show when muted
@@ -236,15 +232,6 @@ screens = [
     ),
 ]
 
-# Battery Append
-if has_battery():
-    widgets_list.insert(
-            7, 
-            widget.Battery(
-            format='{char} {percent:2.0%}',
-            # Adjust 'battery' name if yours is different (e.g., 'BAT1')
-            ),
-    )
 
 # Drag floating layouts.
 mouse = [

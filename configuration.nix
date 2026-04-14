@@ -165,7 +165,7 @@ in
       ''
     else 
       ''
-      ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1 --mode 1920x1080 --rate 120
+      ${pkgs.xorg.xrandr}/bin/xrandr --output eDP-1 --mode 1920x1080 --rate 60
       '';
 
   # Enable networking
@@ -194,9 +194,9 @@ in
   services.xserver = {
     enable = true;
     desktopManager.xterm.enable = false;
-    dpi = 
-      if ui == "L" then 144
-      else 96;
+    dpi = 96;
+      # if ui == "L" then 144
+      # else 96;
     windowManager.qtile = {
        enable = lib.mkIf (conftype != "S") true;
        };
