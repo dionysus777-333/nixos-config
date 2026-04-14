@@ -8,7 +8,6 @@
        horizontal_padding = 12;
        frame_width = 2;
        gap_size = 8;
-       font = "JetBrainsMono Nerd Font 10";
      };
     };
   };

@@ -57,6 +57,9 @@
               # Point this to your existing home.nix
               home-manager.users.user = import ./home.nix;
 	            home-manager.extraSpecialArgs = { inherit inputs conftype ui; host = name; };
+              home-manager.sharedModules = [
+                stylix.homeModules.stylix
+              ];
             }
           ];
         };

@@ -35,6 +35,7 @@ let
     evtest
     lact
     yazi
+    zathura
   ]);
   extra = minimal ++ (with pkgs; 
   [
@@ -100,47 +101,7 @@ in
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
-  # Stylix
-  stylix = {
-   enable = true;
-   base16Scheme = "${pkgs.base16-schemes}/share/themes/irblack.yaml";
-   fonts = {
-    serif = {
-      package = pkgs.dejavu_fonts;
-      name = "DejaVu Serif";
-    };
-
-    sansSerif = {
-      package = pkgs.dejavu_fonts;
-      name = "DejaVu Sans";
-    };
-
-    monospace = {
-      package = pkgs.nerd-fonts.jetbrains-mono;
-      name = "JetBrainsMono Nerd Font";
-    };
-
-    emoji = {
-      package = pkgs.noto-fonts-color-emoji;
-      name = "Noto Color Emoji";
-    };
-
-    sizes = {
-      applications = 
-        if ui == "L" then 13
-        else 11;
-      terminal = 
-        if ui == "L" then 14
-        else 12;
-      desktop = 
-        if ui == "L" then 13
-        else 11;
-      popups = 
-        if ui == "L" then 13
-        else 11;
-    };
-   };
-  };
+ 
 
   programs.dconf.profiles.user.databases = [{
    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
