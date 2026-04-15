@@ -47,6 +47,7 @@ let
     spotify-player
     mullvad-vpn
     libreoffice
+    obs-studio
   ]);
 in
 {
@@ -85,6 +86,10 @@ in
     "d /mnt/usb 0755 root root -"
   ];
 
+  services.mullvad-vpn.enable = true;
+    # services.resolved = {
+    # enable = true;
+    # };
 
   boot.consoleLogLevel = 3;
   boot.initrd.verbose = false;
