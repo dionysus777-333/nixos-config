@@ -162,7 +162,7 @@ layouts = [
         border_normal="#000000",
         split=True,
     ),
-    # layout.Max(),
+    layout.Max(),
 ]
 
 widget_defaults = dict(

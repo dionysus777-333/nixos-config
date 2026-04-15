@@ -19,6 +19,7 @@ let
     bc
     kdePackages.kleopatra
     jq
+    nix-prefetch-github
   ];
   minimal = server ++ (with pkgs;
   [
@@ -107,6 +108,10 @@ in
    settings."org/gnome/desktop/interface".color-scheme = "prefer-dark";
   }];
 
+  xdg.mime.defaultApplications = {
+    "application/pdf" = "org.pwmt.zathura.desktop";
+  };
+  
   i18n.inputMethod = {
   type = "fcitx5";
   enable = lib.mkIf (conftype != "S") true;

@@ -25,6 +25,9 @@ let
     ./modules/steam.nix
     ./modules/firefox.nix
     ./modules/retroarch.nix
+    ./modules/anki.nix
+    ./modules/spotifyp.nix
+
   ];
 in
 {
