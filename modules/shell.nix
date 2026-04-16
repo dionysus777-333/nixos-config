@@ -26,7 +26,8 @@ let nixname = host; in
       lla     = "ls -lah";
       grep    = "grep --color=auto";
       # General System
-      rebuild = "sudo nixos-rebuild switch --flake /home/user/nixos-config#${nixname}";
+      rebuildL = "sudo nixos-rebuild switch --flake /home/user/nixos-config#${nixname}";
+      rebuild = "sudo nixos-rebuild switch --flake github:dionysus777-333/nixos-config#${nixname}";
       restart = "sudo reboot now";
       # Git (because who wants to type 'git'?)
       g = "git";
