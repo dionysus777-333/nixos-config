@@ -202,6 +202,12 @@ in
   enable = true;
   };
 
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
+  };
+
   programs.steam = {
     enable = lib.mkIf (conftype == "E") true;
     extraCompatPackages = with pkgs; [
