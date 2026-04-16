@@ -37,6 +37,7 @@ let
     lact
     yazi
     zathura
+    zotero
   ]);
   extra = minimal ++ (with pkgs; 
   [

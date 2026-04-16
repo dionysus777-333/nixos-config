@@ -3,5 +3,4 @@ plymouth spinning nix logo with clean LY-like password entry
 find a way to do user passwd and create /home/user and chown user automatcially maybe using script
 make personal NixOS liveusb on another usb and a specific setupscript for it.
 anki addons FSRS4Anki and AJT  
-org-roam working with doom emacs
-
+here's what i want to happen in this project. plug in usb, boot. run a command (probably alias) on the installer that prompts for stuff disko would need, such as swap size, which disk, and luks password run a script which prompts for the hostname if the hostname matches a valid one on github it installs using it
