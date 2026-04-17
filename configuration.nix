@@ -49,6 +49,7 @@ let
     mullvad-vpn
     libreoffice
     obs-studio
+    prismlauncher
   ]);
 in
 {
