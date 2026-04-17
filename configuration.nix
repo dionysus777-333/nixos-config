@@ -50,6 +50,7 @@ let
     libreoffice
     obs-studio
     prismlauncher
+    ungoogled-chromium
   ]);
 in
 {
