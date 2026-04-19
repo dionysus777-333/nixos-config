@@ -38,6 +38,7 @@ let
     yazi
     zathura
     zotero
+    localsend
   ]);
   extra = minimal ++ (with pkgs; 
   [
