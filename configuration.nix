@@ -20,8 +20,6 @@ let
     kdePackages.kleopatra
     jq
     nix-prefetch-github
-    gcc
-    gnumake
   ];
   minimal = server ++ (with pkgs;
   [
@@ -41,6 +39,7 @@ let
     zathura
     zotero
     localsend
+    qdirstat
   ]);
   extra = minimal ++ (with pkgs; 
   [
