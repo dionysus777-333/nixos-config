@@ -20,6 +20,7 @@ let
     kdePackages.kleopatra
     jq
     nix-prefetch-github
+    gcc
   ];
   minimal = server ++ (with pkgs;
   [
