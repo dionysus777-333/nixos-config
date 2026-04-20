@@ -21,6 +21,7 @@ let
     jq
     nix-prefetch-github
     gcc
+    gnumake
   ];
   minimal = server ++ (with pkgs;
   [
