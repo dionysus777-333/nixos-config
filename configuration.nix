@@ -53,6 +53,7 @@ let
     obs-studio
     prismlauncher
     ungoogled-chromium
+    osu-lazer
   ]);
 in
 {
